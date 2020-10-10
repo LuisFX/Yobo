@@ -107,6 +107,7 @@ module CompositionRoot =
             Auth =
                 let tryGetUserByEmail (email:string) =
                     if email = adminUser.Email then
+                        printfn "====== Detected admin user!"
                         ({
                             Id = adminUser.Id
                             Email = adminUser.Email

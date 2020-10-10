@@ -12,11 +12,11 @@ type AuthenticationError =
     
 module AuthenticationError =
     let explain = function
-        | InvalidLoginOrPassword -> "Nesprávně vyplněný email nebo heslo."
-        | InvalidOrExpiredToken -> "Token není validní nebo již vypršela jeho platnost."
-        | EmailAlreadyRegistered -> "Tento email je již v systému registrován."
-        | AccountAlreadyActivatedOrNotFound -> "Tento účet je již zaktivován nebo byl zadán neplatný aktivační klíč."
-        | InvalidPasswordResetKey -> "Kód pro nastavení nového hesla je nesprávný, nebo byl již použit."
+        | InvalidLoginOrPassword -> "Incorrectly filled in email or password."
+        | InvalidOrExpiredToken -> "The token is not valid or has expired."
+        | EmailAlreadyRegistered -> "This email is already registered in the system."
+        | AccountAlreadyActivatedOrNotFound -> "This account has already been activated or an invalid activation key has been entered."
+        | InvalidPasswordResetKey -> "The code for setting a new password is incorrect or has already been used."
 
 type DomainError =
     | UserNotActivated
@@ -27,11 +27,11 @@ type DomainError =
 
 module DomainError =
     let explain = function
-        | UserNotActivated -> "Uživatel ještě nebyl aktivován."
-        | LessonCannotBeCancelled -> "Lekci nelze zrušit."
-        | LessonCannotBeDeleted -> "Lekci nelze smazat."
-        | LessonCannotBeReserved -> "Lekci nelze zarezervovat."
-        | LessonReservationCannotBeCancelled -> "Rezervaci na lekci nelze již zrušit."
+        | UserNotActivated -> "The user has not yet been activated."
+        | LessonCannotBeCancelled -> "The lesson cannot be canceled."
+        | LessonCannotBeDeleted -> "The lesson cannot be deleted."
+        | LessonCannotBeReserved -> "The lesson cannot be booked."
+        | LessonReservationCannotBeCancelled -> "You can no longer cancel a lesson reservation."
 
 type ServerError =
     | Exception of string
@@ -52,7 +52,7 @@ module ServerError =
             |> List.map ValidationError.explain
             |> String.concat ", "
         | Authentication e -> e |> AuthenticationError.explain
-        | DatabaseItemNotFound i -> sprintf "Položka s ID %A nebyla nalezena v databázi." i
+        | DatabaseItemNotFound i -> sprintf "Item with ID %A was not found in the database." i
         | Domain e -> e |> DomainError.explain
         
     let failwith (er:ServerError) = raise (ServerException er)

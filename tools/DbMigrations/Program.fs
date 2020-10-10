@@ -3,8 +3,13 @@ open DbUp
 
 [<EntryPoint>]
 let main args =
-    let connectionString = args.[0]
-    let scriptsPath = args.[1]
+    let connectionString = @"
+      Server=127.0.0.1,1401;
+      Database=Master;
+      User Id=SA;
+      Password=123!@#qweQWE
+   "
+    let scriptsPath = args.[0]
     let engine =
             DeployChanges.To
                 .SqlDatabase(connectionString)
