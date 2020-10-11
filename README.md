@@ -24,6 +24,8 @@ All graphic content (especially logo) and "Mindful Yoga" phrase are trademarks r
 Yup. Just clone the repo, delete trademarked `/src/Yobo.Client/public/img/logo.png`, rename "Mindful Yoga" to something else like "My Amazing Yoga Kickass Booking" (it's currently in [3 files](https://github.com/Dzoukr/Yobo/search?q=mindful) anyway, so no brainer here :-)) and we're all ok.
 
 
+Here are the following steps to get the application configured and running:
+
 ## Run a docker container with sqlserver:
 
 (from https://hub.docker.com/_/microsoft-mssql-server)
@@ -40,6 +42,19 @@ docker run \
 -p 1401:1433 \
 --name sql1 \
 -d microsoft/mssql-server-linux:2017-latest
+```
+
+## Run database migrations
+
+In order to scaffold the database schema, you must run the DbMigrations project. The database scripts are located in the ./database directory
+
+From tools/DbMigrations:
+
+```
+dotnet run <connectionString> <scriptsLocation>
+
+eg;
+dotnet run 'Server=127.0.0.1,1401; Database=Master; User Id=SA; Password=YourSTRONG!Passw0rd' '../../database'
 ```
 
 
@@ -92,4 +107,3 @@ with this:
 
 ## Registering and Login with an admin user:
 Register a user matching the email address listed in the above local.settings.json's AdminEmail key. Once an admin user is registered, login using the admin credentials.
-
