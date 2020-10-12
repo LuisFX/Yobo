@@ -30,7 +30,7 @@ let view = React.functionComponent(fun () ->
             Bulma.fieldBody [
                 Bulma.input.text [
                     ValidationViews.color model.Form.ValidationErrors (nameof(model.Form.FormData.Email))
-                    prop.placeholder "Váš email"
+                    prop.placeholder "Your email"
                     prop.onTextChange (fun x -> { model.Form.FormData with Email = x } |> FormChanged |> dispatch)
                     prop.valueOrDefault model.Form.FormData.Email
                 ]
@@ -41,7 +41,7 @@ let view = React.functionComponent(fun () ->
             Bulma.fieldBody [
                 Bulma.input.password [
                     ValidationViews.color model.Form.ValidationErrors (nameof(model.Form.FormData.Password))
-                    prop.placeholder "Vaše heslo"
+                    prop.placeholder "Your password"
                     prop.onTextChange (fun x -> { model.Form.FormData with Password = x } |> FormChanged |> dispatch)
                     prop.valueOrDefault (model.Form.FormData.Password)
                 ]
@@ -54,15 +54,15 @@ let view = React.functionComponent(fun () ->
                     yield color.isPrimary
                     yield button.isFullWidth
                     if model.Form.IsLoading then yield! [ button.isLoading; prop.disabled true ]
-                    yield prop.text "Přihlásit se"
+                    yield prop.text "Sign in"
                     yield prop.onClick (fun _ -> Login |> dispatch)
                 ]
             ]
         ]
         Html.div [
-            Html.aRouted "Registrace" (Anonymous Registration)
+            Html.aRouted "Registration" (Anonymous Registration)
             Html.span " · "
-            Html.aRouted "Zapomněl(a) jsem heslo!" (Anonymous ForgottenPassword)
+            Html.aRouted "I forgot my password!" (Anonymous ForgottenPassword)
         ]
     ]
     |> inTemplate

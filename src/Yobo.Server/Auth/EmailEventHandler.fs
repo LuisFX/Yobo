@@ -17,7 +17,7 @@ let handle
         | Registered args ->
             let name = sprintf "%s %s" args.FirstName args.LastName
             let tos = { Email = args.Email; Name = name }
-            let subject = "Registrace Mindful Yoga"
+            let subject = "Registered Yobo Yoga"
             let message = args.ActivationKey |> templateBuilder.RegisterEmailMessage
             do! {| To = tos; Subject = subject; Message = message |} |> sendEmail
             return ()
@@ -26,7 +26,7 @@ let handle
             | Some user ->
                 let name = sprintf "%s %s" user.FirstName user.LastName
                 let tos = { Email = user.Email; Name = name }
-                let subject = "Požadavek na změnu hesla"
+                let subject = "Password change request"
                 let message = args.PasswordResetKey |> templateBuilder.PasswordResetEmailMessage
                 do! {| To = tos; Subject = subject; Message = message |} |> sendEmail
                 return ()
@@ -36,7 +36,7 @@ let handle
             | Some user ->
                 let name = sprintf "%s %s" user.FirstName user.LastName
                 let tos = { Email = user.Email; Name = name }
-                let subject = "Registrace Mindful Yoga"
+                let subject = "Registered Yobo Yoga"
                 let message = args.ActivationKey |> templateBuilder.RegisterEmailMessage
                 do! {| To = tos; Subject = subject; Message = message |} |> sendEmail
                 return ()

@@ -26,10 +26,10 @@ let inTemplate (content:ReactElement) =
 
 let registerForm model dispatch =
     Bulma.box [
-        Bulma.title.h1 "Registrace"
+        Bulma.title.h1 "Registration"
         
         Bulma.field.div [
-            Bulma.label "Křestní jméno"
+            Bulma.label "First name"
             Bulma.fieldBody [
                 Bulma.input.text [
                     ValidationViews.color model.Form.ValidationErrors (nameof(model.Form.FormData.FirstName))
@@ -41,7 +41,7 @@ let registerForm model dispatch =
         ]
         
         Bulma.field.div [
-            Bulma.label "Příjmení"
+            Bulma.label "Last name"
             Bulma.fieldBody [
                 Bulma.input.text [
                     ValidationViews.color model.Form.ValidationErrors (nameof(model.Form.FormData.LastName))
@@ -65,7 +65,7 @@ let registerForm model dispatch =
         ]
         
         Bulma.field.div [
-            Bulma.label "Heslo"
+            Bulma.label "Password"
             Bulma.fieldBody [
                 Bulma.input.password [
                     ValidationViews.color model.Form.ValidationErrors (nameof(model.Form.FormData.Password))
@@ -77,7 +77,7 @@ let registerForm model dispatch =
         ]
         
         Bulma.field.div [
-            Bulma.label "Heslo (ještě jednou pro kontrolu)"
+            Bulma.label "Password (once again to check)"
             Bulma.fieldBody [
                 Bulma.input.password [
                     ValidationViews.color model.Form.ValidationErrors (nameof(model.Form.FormData.SecondPassword))
@@ -98,11 +98,11 @@ let registerForm model dispatch =
                 ]
                 Html.label [
                     prop.htmlFor "terms"
-                    prop.text "Souhlasím s obchodními podmínkami"
+                    prop.text "I agree to the terms and conditions"
                 ]
             ]
             Html.div [
-                Html.a [ prop.onClick (fun _ -> ToggleTerms |> dispatch); prop.text "Obchodní podmínky" ]
+                Html.a [ prop.onClick (fun _ -> ToggleTerms |> dispatch); prop.text "Terms and Conditions" ]
             ]
             ValidationViews.help model.Form.ValidationErrors (nameof(model.Form.FormData.AgreeButtonChecked))
         ]
@@ -130,13 +130,13 @@ let registerForm model dispatch =
                     yield color.isPrimary
                     yield button.isFullWidth
                     if model.Form.IsLoading then yield! [ button.isLoading; prop.disabled true ]
-                    yield prop.text "Registrovat"
+                    yield prop.text "Register"
                     yield prop.onClick (fun _ -> Register |> dispatch)
                 ]
             ]
         ]
         Html.div [
-            Html.aRouted "Zpět na přihlášení" (Anonymous Login)
+            Html.aRouted "Back to login" (Anonymous Login)
         ]
     ]
 
@@ -148,7 +148,7 @@ let view = React.functionComponent(fun () ->
         
         // form
         if model.ShowThankYou then
-            SharedView.BoxedViews.showSuccessMessage "Registrace proběhla úspěšně! Pro aktivaci účtu klikněte na odkaz v registračním emailu."
+            SharedView.BoxedViews.showSuccessMessage "Registration was successful! To activate your account, click on the link in the registration email."
         else            
             registerForm model dispatch            
     ]
